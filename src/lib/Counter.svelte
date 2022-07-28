@@ -28,7 +28,8 @@
         counter.local = parseInt(stored);
       }
     }
-    (function loadWorldSegg() {
+    let loadWorldSegg;
+    (loadWorldSegg = () => {
       const xhr = new XMLHttpRequest();
       xhr.open("GET", "https://api.countapi.xyz/get/uwoh.vercel.app/segg");
       xhr.responseType = "json";
@@ -37,6 +38,9 @@
       };
       xhr.send();
     })();
+    setInterval(function () {
+      loadWorldSegg();
+    }, 1337);
   })();
   const countSegg = () => {
     const xhr = new XMLHttpRequest();
