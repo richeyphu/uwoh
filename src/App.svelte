@@ -1,7 +1,8 @@
 <script lang="ts">
   import Counter from "./lib/Counter.svelte";
-  let count = 0;
-  $: seg = count;
+  let count = { local: 0, global: 0 };
+  $: seg = count.local;
+  $: worldSeg = count.global;
 </script>
 
 <main>
@@ -12,5 +13,8 @@
   </div>
   <p>
     🆂🥚 : {seg}
+  </p>
+  <p>
+    🌎 : {worldSeg}
   </p>
 </main>

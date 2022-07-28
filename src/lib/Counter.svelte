@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let counter = 0;
+  export let counter = { local: 0, global: 0 };
 
   const segg = () => {
     addOneSegg();
@@ -13,30 +13,40 @@
     audio.play();
   };
   const addOneSegg = () => {
-    counter += 1;
+    counter.local += 1;
+    // counter.global += 1;
   };
   const saveSegg = () => {
     if (typeof window !== "undefined") {
-      localStorage.setItem("seg", counter.toString());
+      localStorage.setItem("seg", counter.local.toString());
     }
   };
   (function loadSegg() {
     if (typeof window !== "undefined") {
       const stored = localStorage.getItem("seg");
       if (stored) {
-        counter = parseInt(stored);
+        counter.local = parseInt(stored);
       }
     }
+    (function loadWorldSegg() {
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", "https://api.countapi.xyz/get/uwoh.vercel.app/segg");
+      xhr.responseType = "json";
+      xhr.onload = function () {
+        counter.global = this.response.value;
+      };
+      xhr.send();
+    })();
   })();
   const countSegg = () => {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "https://api.countapi.xyz/hit/uwoh.vercel.app/segg");
-    // (() => {
-    //   xhr.responseType = "json";
-    //   xhr.onload = () => {
-    //     alert(`This button has been clicked ${this.response.value} times!`);
-    //   };
-    // })();
+    (() => {
+      xhr.responseType = "json";
+      xhr.onload = function () {
+        counter.global = this.response.value;
+      };
+    })();
     xhr.send();
   };
 </script>
