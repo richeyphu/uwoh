@@ -12,9 +12,9 @@
     <Counter bind:counter={count} />
   </div>
   <p>
-    🆂🥚 : {seg}
+    🆂🥚 : {seg.toLocaleString()}
   </p>
   <p>
-    🌎 : {worldSeg}
+    🌎 : {worldSeg.toLocaleString()}
   </p>
 </main>
