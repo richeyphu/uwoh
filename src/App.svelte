@@ -15,6 +15,6 @@
     🆂🥚 : {seg.toLocaleString()}
   </p>
   <p>
-    🌎 : {worldSeg.toLocaleString()}
+    🌏 : {worldSeg.toLocaleString()}
   </p>
 </main>
